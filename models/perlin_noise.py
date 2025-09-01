@@ -23,7 +23,8 @@ def grad(hash, x):
         grad = -grad
     return grad * x
 
-
+# PerlinConfig will allow us to easily experiment and save different configuration and
+# use them for later
 class PerlinConfig:
     def __init__(self, length, scale, amplitude, base, seed=None):
         self.length = length
@@ -32,6 +33,7 @@ class PerlinConfig:
         self.base = base
         self.seed = seed
 
+# Perlin1D class for generating 1D Perlin noise
 class Perlin1D:
     def __init__(self, seed=None):
         if seed is not None:

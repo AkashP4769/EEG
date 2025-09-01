@@ -5,19 +5,21 @@ from generate_perlin_noise import PerlinConfig, Perlin1D
 import pandas as pd
 
 #Create a brainwavetype of enum, focused, unfocused
+#Would be beneficial, infuture if we want to add more brain wave types, related to eyes etc.
 class BrainWaveType(Enum):
     FOCUSED = "focused"
     UNFOCUSED = "unfocused"
 
 class BrainWave:
+
+    # init method takes a brain wave type and an optional PerlinConfig
+    # If no config is provided, a default one is generated based on the wave type.
     def __init__(self, type: BrainWaveType, config: PerlinConfig=None):
         self.type = type
-        self.wave_data = None
         self.config = config
+        self.wave_data = self.generate_wave_from_perlin(self.config)
 
-        if self.config is None:
-            self.wave_data = self.generate_wave_from_perlin(self.config)
-
+    # Or you can create a your own custom wave by giving a perlin configuration
     def generate_wave_from_perlin(self, config: PerlinConfig=None):
         self.config = config
         if self.config is None:
@@ -30,17 +32,20 @@ class BrainWave:
         self.wave_data = wave_values
         return self.wave_data
 
+    # Just as it says, saves to csv
     def save_to_csv(self, path: str):
         if self.wave_data is None:
             raise ValueError("Wave data is not generated.")
 
         df = pd.DataFrame({"EEG": self.wave_data, "Type": self.type.value})
-        
+
         #create path if doesnt exist
         output_directory = os.path.dirname(path)
         os.makedirs(output_directory, exist_ok=True)
         df.to_csv(path, index=False)
 
+
+    # If you want to see everything in a graph
     def visualize_data(self):
         if self.wave_data is None:
             raise ValueError("Wave data is not generated.")
