@@ -1,5 +1,5 @@
 from matplotlib import pyplot as plt
-from perlin_noise import generate_perlin_series
+from models.perlin_noise import generate_perlin_series
 
 def visualize_perlin_noise():
     """
