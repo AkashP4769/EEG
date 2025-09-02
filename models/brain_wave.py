@@ -50,20 +50,6 @@ class BrainWave:
         os.makedirs(output_directory, exist_ok=True)
         self.wave_data.to_csv(path, index=False)
 
-
-    # If you want to see everything in a graph
-    # def visualize_data(self):
-    #     if self.wave_data is None:
-    #         raise ValueError("Wave data is not generated.")
-        
-    #     plt.figure(figsize=(12, 6))
-    #     plt.plot(self.wave_data, label=f"EEG - {self.type.value}")
-    #     plt.title(f"Brain Wave - {self.type.value}")
-    #     plt.xlabel("Time")
-    #     plt.ylabel("Amplitude")
-    #     plt.legend()
-    #     plt.show()
-
     def visualize_data(self, heading: str = "Brain Wave Simulation"):
         # Map type → color
         color_map = {
